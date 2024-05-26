@@ -2,7 +2,7 @@
 
 ## Projects:
 
-- **[0x00. Pagination]()**
+- **[0x00. Pagination](https://github.com/codenvibes/alx-backend/tree/master/0x00-pagination)**
 - **[0x01. Caching]()**
 - **[0x02. i18n]()**
 - **[0x03. Queuing System in JS]()**
