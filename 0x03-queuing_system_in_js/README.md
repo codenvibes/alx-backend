@@ -1081,6 +1081,8 @@ File: [9-stock.js]()
 bob@dylan:~$ 
 </code></pre>
 
+### In stock in Redis
+
 <p>Create a client to connect to the Redis server:</p>
 
 <ul>
@@ -1095,6 +1097,8 @@ bob@dylan:~$
 <li>It will return the reserved stock for a specific item</li>
 </ul></li>
 </ul>
+
+### Product detail
 
 <p>Create the route <code>GET /list_products/:itemId</code>, that will return the current product and the current available stock (by using <code>getCurrentReservedStockById</code>) with the following JSON format:</p>
 
