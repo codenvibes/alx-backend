@@ -33,7 +33,7 @@
 
 
 <details>
-<summary><b><a href="https://intranet.alxswe.com/rltoken/tw8sQWhB3HJvk3jmR2GBwg">pytz</a></b></summary><br>
+<summary><b><a href="https://pypi.org/project/pytz/">pytz</a></b></summary><br>
 
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
