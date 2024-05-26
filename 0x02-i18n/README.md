@@ -216,8 +216,10 @@ File: [4-app.py](), [templates/4-index.html]()
 
 <p>Now you should be able to test different translations by visiting <code>http://127.0.0.1:5000?locale=[fr|en]</code>.</p>
 
-<p><strong>Visiting <code>http://127.0.0.1:5000/?locale=fr</code> should display this level 1 heading:</strong>
-<img alt="" loading="lazy" src="https://github.com/codenvibes/alx-backend/blob/master/0x02-i18n/images/f958f4a1529b535027ce.png" style=""/></p>
+<p><strong>Visiting <code>http://127.0.0.1:5000/?locale=fr</code> should display this level 1 heading:</strong></p>
+
+<br>
+<div align="center"><img alt="" loading="lazy" src="https://github.com/codenvibes/alx-backend/blob/master/0x02-i18n/images/f958f4a1529b535027ce.png" style=""/></div>
 
 
 </details>
