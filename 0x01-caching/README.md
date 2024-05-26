@@ -27,7 +27,7 @@ In this project, you learn different caching algorithms.
 
 
 <details>
-<summary><b><a href="https://intranet.alxswe.com/rltoken/U44RQjXp8xBtsbNIyhHIyw">Cache replacement policies - LIFO</a></b></summary><br>
+<summary><b><a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#Last_In_First_Out_%28LIFO%29">Cache replacement policies - LIFO</a></b></summary><br>
 
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
