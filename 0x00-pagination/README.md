@@ -5,7 +5,7 @@
 <div align="center">
 <img width="60%" src="https://github.com/codenvibes/alx-backend/blob/master/0x00-pagination/images/3646eb02de6527ca5d83.png">
 <img width="60%" src="https://github.com/codenvibes/alx-backend/blob/master/0x00-pagination/images/746187b76bea1f46030e.png">
-<img width="60%" src="">
+<img width="60%" src="https://github.com/codenvibes/alx-backend/blob/master/0x00-pagination/images/665ce871c2ecc66a8e71.png">
 </div>
 
 <!-- <br>
