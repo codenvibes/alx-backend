@@ -175,9 +175,9 @@ $ pybabel init -i messages.pot -d translations -l fr
 <p>Then edit files <code>translations/[en|fr]/LC_MESSAGES/messages.po</code> to provide the correct value for each message ID for each language. Use the following translations:</p>
 
 <table class="hbtn-table"><tbody><tr>
-<th>msgid</th>
-<th>English</th>
-<th>French</th>
+<td><b>msgid</b></td>
+<td><b>English</b></td>
+<td><b>French</b></td>
 </tr>
 <tr>
 <td><code>home_title</code></td>
