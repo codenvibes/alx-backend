@@ -174,10 +174,22 @@ $ pybabel init -i messages.pot -d translations -l fr
 
 <p>Then edit files <code>translations/[en|fr]/LC_MESSAGES/messages.po</code> to provide the correct value for each message ID for each language. Use the following translations:</p>
 
-| **msgid**     | **English**              | **French**                   |
-|---------------|--------------------------|------------------------------|
-| `home_title`  | `"Welcome to Holberton"` | `"Bienvenue chez Holberton"` |
-| `home_header` | `"Hello world!"`         | `"Bonjour monde!"`           |
+<table class="hbtn-table"><tbody><tr>
+<th>msgid</th>
+<th>English</th>
+<th>French</th>
+</tr>
+<tr>
+<td><code>home_title</code></td>
+<td><code>"Welcome to Holberton"</code></td>
+<td><code>"Bienvenue chez Holberton"</code></td>
+</tr>
+<tr>
+<td><code>home_header</code></td>
+<td><code>"Hello world!"</code></td>
+<td><code>"Bonjour monde!"</code></td>
+</tr>
+</tbody></table>
 
 <p>Then compile your dictionaries with</p>
 
