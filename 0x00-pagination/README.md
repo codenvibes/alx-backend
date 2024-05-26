@@ -19,7 +19,7 @@
 
 ## Resources
 <details>
-<summary><b><a href="https://intranet.alxswe.com/rltoken/7Kdzi9CH1LdSfNQ4RaJUQw">REST API Design: Pagination</a></b></summary><br>
+<summary><b><a href="https://www.moesif.com/blog/technical/api-design/REST-API-Design-Filtering-Sorting-and-Pagination/#pagination">REST API Design: Pagination</a></b></summary><br>
 
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
