@@ -1179,6 +1179,8 @@ File: [100-seat.js]()
 
 <p>Create a <code>Kue</code> queue</p>
 
+### Server
+
 <p>Create an express server listening on the port 1245. (You will start it via: <code>npm run dev 100-seat.js</code>)</p>
 
 <p>Add the route <code>GET /available_seats</code> that returns the number of seat available:</p>
