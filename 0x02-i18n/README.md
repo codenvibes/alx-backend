@@ -3,7 +3,7 @@
 
 <br>
 <div align="center">
-<img width="30%" src="https://github.com/codenvibes/alx-backend/blob/master/0x02-i18n/images/91e1c50322b2428428f9.jpeg">
+<img width="40%" src="https://github.com/codenvibes/alx-backend/blob/master/0x02-i18n/images/91e1c50322b2428428f9.jpeg">
 </div>
 
 <!-- <br>
