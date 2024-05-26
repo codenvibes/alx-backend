@@ -440,6 +440,8 @@ File: [4-redis_advanced_op.js]()
 
 <p>In a file named <code>4-redis_advanced_op.js</code>, let’s use the client to store a hash value</p>
 
+### Create Hash:
+
 <p>Using <code>hset</code>, let’s store the following:</p>
 
 <ul>
