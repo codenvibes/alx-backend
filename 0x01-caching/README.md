@@ -35,7 +35,7 @@ In this project, you learn different caching algorithms.
 
 
 <details>
-<summary><b><a href="https://intranet.alxswe.com/rltoken/gKerxvR4dnXQYkBX2ujZiQ">Cache replacement policies - LRU</a></b></summary><br>
+<summary><b><a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_Recently_Used_%28LRU%29">Cache replacement policies - LRU</a></b></summary><br>
 
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
