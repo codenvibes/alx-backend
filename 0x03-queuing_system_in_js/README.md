@@ -17,7 +17,7 @@
 
 ## Resources
 <details>
-<summary><b><a href="https://intranet.alxswe.com/rltoken/bD8ATSAVbine9-zEXenwyw">Redis quick start</a></b></summary><br>
+<summary><b><a href="https://redis.io/docs/latest/integrate/">Redis quick start</a></b></summary><br>
 
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
