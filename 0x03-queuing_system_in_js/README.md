@@ -1068,6 +1068,8 @@ File: [9-stock.js]()
 <li>It will return the item from <code>listProducts</code> with the same id</li>
 </ul>
 
+### Server
+
 <p>Create an <code>express</code> server listening on the port 1245. (You will start it via: <code>npm run dev 9-stock.js</code>)</p>
 
 <p>Create the route <code>GET /list_products</code> that will return the list of every available product with the following JSON format:</p>
