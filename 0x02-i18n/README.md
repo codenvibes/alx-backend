@@ -347,6 +347,18 @@ File: [app.py](), [templates/index.html](), [translations/en/LC_MESSAGES/message
 
 <p>Use the following translations</p>
 
+<table class="hbtn-table"><tbody><tr>
+<th>msgid</th>
+<th>English</th>
+<th>French</th>
+</tr>
+<tr>
+<td><code>current_time_is</code></td>
+<td><code>"The current time is %(current_time)s."</code></td>
+<td><code>"Nous sommes le %(current_time)s."</code></td>
+</tr>
+</tbody></table>
+
 <p><strong>Displaying the time in French looks like this:</strong></p>
 
 <p><img alt="" loading="lazy" src="./Project_ 0x02. i18n _ Nairobi Intranet_files/bba4805d6dca0a46a0f6.png" style=""/></p>
