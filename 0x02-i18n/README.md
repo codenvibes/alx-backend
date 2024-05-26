@@ -274,7 +274,9 @@ File: [5-app.py](), [templates/5-index.html]()
 <br>
 
 <p><strong>Visiting <code>http://127.0.0.1:5000/?login_as=2</code> in your browser should display this:</strong>
-<img alt="" loading="lazy" src="./Project_ 0x02. i18n _ Nairobi Intranet_files/277f24308c856a09908c.png" style=""/></p>
+</p>
+
+<div align="center"><img alt="" src="https://github.com/codenvibes/alx-backend/blob/master/0x02-i18n/images/277f24308c856a09908c.png" style=""/></div>
 
 
 </details>
