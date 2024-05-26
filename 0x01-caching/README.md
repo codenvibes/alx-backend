@@ -691,3 +691,14 @@ guillaume@ubuntu:~/0x01$
 
 </details>
 
+<details>
+<summary>
+
+### 5. LFU Caching
+`#advanced`
+
+File: [100-lfu_cache.py]()
+</summary>
+
+
+</details>
