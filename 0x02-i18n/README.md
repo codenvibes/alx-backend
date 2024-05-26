@@ -25,7 +25,7 @@
 
 
 <details>
-<summary><b><a href="https://intranet.alxswe.com/rltoken/RtGz7pI7TKnYqrMMG9rWMg">Flask i18n tutorial</a></b></summary><br>
+<summary><b><a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-i18n-and-l10n">Flask i18n tutorial</a></b></summary><br>
 
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
