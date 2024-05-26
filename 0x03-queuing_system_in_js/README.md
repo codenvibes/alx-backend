@@ -1114,6 +1114,8 @@ bob@dylan:~$
 bob@dylan:~$ 
 </code></pre>
 
+### Reserve a product
+
 <p>Create the route <code>GET /reserve_product/:itemId</code>:</p>
 
 <ul>
