@@ -294,6 +294,13 @@ File: [6-app.py](), [templates/6-index.html]()
 
 <p>The order of priority should be</p>
 
+<ol>
+<li>Locale from URL parameters</li>
+<li>Locale from user settings</li>
+<li>Locale from request header</li>
+<li>Default locale</li>
+</ol>
+
 <p>Test by logging in as different users</p>
 
 <p><img alt="" loading="lazy" src="./Project_ 0x02. i18n _ Nairobi Intranet_files/9941b480b0b9d87dc5de.png" style=""/></p>
