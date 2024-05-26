@@ -1,5 +1,5 @@
 <h1 align="center"><b>0X03. QUEUING SYSTEM IN JS</b></h1>
-<div align="center"><code>Back-end</code> <code>JavaScript</code> <code>ES6</code> <code>Redis</code> <code>NodeJS</code> <code>ExpressJS</code> <code>Kue </code></div>
+<div align="center"><code>Back-end</code> <code>JavaScript</code> <code>ES6</code> <code>Redis</code> <code>NodeJS</code> <code>ExpressJS</code> <code>Kue</code></div>
 
 <!-- <br>
 <hr>
