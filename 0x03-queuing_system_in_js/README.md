@@ -1164,6 +1164,8 @@ bob@dylan:~$
 File: [100-seat.js]()
 </summary>
 
+### Redis
+
 <p>Create a Redic client:</p>
 
 <ul>
