@@ -348,9 +348,9 @@ File: [app.py](), [templates/index.html](), [translations/en/LC_MESSAGES/message
 <p>Use the following translations</p>
 
 <table class="hbtn-table"><tbody><tr>
-<td>msgid</td>
-<td>English</td>
-<td>French</td>
+<td><b>msgid</b></td>
+<td><b>English</b></td>
+<td><b>French</b></td>
 </tr>
 <tr>
 <td><code>current_time_is</code></td>
