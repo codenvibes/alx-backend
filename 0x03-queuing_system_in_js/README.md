@@ -33,7 +33,7 @@
 
 
 <details>
-<summary><b><a href="https://intranet.alxswe.com/rltoken/mRftfl67BrNvl-RM5JQfUA">Redis client for Node JS</a></b></summary><br>
+<summary><b><a href="https://github.com/redis/node-redis">Redis client for Node JS</a></b></summary><br>
 
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
