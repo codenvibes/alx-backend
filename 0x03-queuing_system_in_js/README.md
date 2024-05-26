@@ -1,6 +1,11 @@
 <h1 align="center"><b>0X03. QUEUING SYSTEM IN JS</b></h1>
 <div align="center"><code>Back-end</code> <code>JavaScript</code> <code>ES6</code> <code>Redis</code> <code>NodeJS</code> <code>ExpressJS</code> <code>Kue</code></div>
 
+<br>
+<div align="center">
+<img width="40%" src=https://github.com/codenvibes/alx-backend/blob/master/0x03-queuing_system_in_js/images/1486e02a78cdf7b4557c.png">
+</div>
+
 <!-- <br>
 <hr>
 <h3><a href=>Notes</a></h3>
