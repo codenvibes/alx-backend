@@ -270,7 +270,7 @@ OK
 File: [0-redis_client.js]()
 </summary>
 
-<p>Install <a href="https://intranet.alxswe.com/rltoken/mRftfl67BrNvl-RM5JQfUA" target="_blank" title="node_redis">node_redis</a> using npm</p>
+<p>Install <a href="https://github.com/redis/node-redis" target="_blank" title="node_redis">node_redis</a> using npm</p>
 
 <p>Using Babel and ES6, write a script named <code>0-redis_client.js</code>. It should connect to the Redis server running on your machine:</p>
 
