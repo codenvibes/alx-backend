@@ -459,6 +459,8 @@ File: [4-redis_advanced_op.js]()
 <li>Make sure you use <code>redis.print</code> for each <code>hset</code></li>
 </ul>
 
+### Display Hash:
+
 <p>Using <code>hgetall</code>, display the object stored in Redis. It should return the following:</p>
 
 <p><strong>Requirements:</strong></p>
