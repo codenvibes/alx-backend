@@ -321,6 +321,12 @@ File: [7-app.py](), [templates/7-index.html]()
 
 <p>The logic should be the same as <code>get_locale</code>:</p>
 
+<ol>
+<li>Find <code>timezone</code> parameter in URL parameters</li>
+<li>Find time zone from user settings</li>
+<li>Default to UTC</li>
+</ol>
+
 <p>Before returning a URL-provided or user time zone, you must validate that it is a valid time zone. To that, use <code>pytz.timezone</code> and catch the <code>pytz.exceptions.UnknownTimeZoneError</code> exception.</p>
 
 
