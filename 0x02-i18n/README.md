@@ -363,6 +363,8 @@ File: [app.py](), [templates/index.html](), [translations/en/LC_MESSAGES/message
 
 <div align="center"><img alt="" src="https://github.com/codenvibes/alx-backend/blob/master/0x02-i18n/images/bba4805d6dca0a46a0f6.png" style=""/></div>
 
+<br>
+
 <p><strong>Displaying the time in English looks like this:</strong></p>
 
 <div align="center"><img alt="" src="https://github.com/codenvibes/alx-backend/blob/master/0x02-i18n/images/54f3be802024dbcf06f4.png" style=""/></div>
