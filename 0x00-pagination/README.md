@@ -1,6 +1,8 @@
 <h1 align="center"><b>0X00. PAGINATION</b></h1>
 <div align="center"><code>Back-end</code></div>
 
+<br><div align="center"><img width="60%" src="https://github.com/codenvibes/alx-backend/blob/master/0x00-pagination/images/3646eb02de6527ca5d83.png"></div>
+
 <!-- <br>
 <hr>
 <h3><a href=>Notes</a></h3>
