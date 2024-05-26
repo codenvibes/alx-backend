@@ -1175,6 +1175,8 @@ File: [100-seat.js]()
 <li>Initialize the boolean <code>reservationEnabled</code> to <code>true</code> - it will be turn to <code>false</code> when no seat will be available</li>
 </ul>
 
+### `Kue` queue
+
 <p>Create a <code>Kue</code> queue</p>
 
 <p>Create an express server listening on the port 1245. (You will start it via: <code>npm run dev 100-seat.js</code>)</p>
