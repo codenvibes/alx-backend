@@ -27,7 +27,7 @@
 
 
 <details>
-<summary><b><a href="https://intranet.alxswe.com/rltoken/tfzcEbTSdMYSYxsspJH_oA">HATEOAS</a></b></summary><br>
+<summary><b><a href="https://en.wikipedia.org/wiki/HATEOAS">HATEOAS</a></b></summary><br>
 
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
