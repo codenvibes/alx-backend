@@ -25,7 +25,7 @@
 
 
 <details>
-<summary><b><a href="https://intranet.alxswe.com/rltoken/vFJSkoXkIvLqHzQgx8DVcw">Redis client interface</a></b></summary><br>
+<summary><b><a href="https://redis.io/docs/latest/develop/connect/cli/">Redis client interface</a></b></summary><br>
 
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
