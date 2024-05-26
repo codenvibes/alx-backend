@@ -3,7 +3,7 @@
 
 <br>
 <div align="center">
-<img width="40%" src="https://github.com/codenvibes/alx-backend/blob/master/0x03-queuing_system_in_js/images/1486e02a78cdf7b4557c.png">
+<img width="60%" src="https://github.com/codenvibes/alx-backend/blob/master/0x03-queuing_system_in_js/images/1486e02a78cdf7b4557c.png">
 </div>
 
 <!-- <br>
