@@ -17,7 +17,7 @@
 
 ## Resources
 <details>
-<summary><b><a href="https://intranet.alxswe.com/rltoken/0m4Qykp52fFH-dPzlWIdkw">Flask-Babel</a></b></summary><br>
+<summary><b><a href="https://web.archive.org/web/20201111174034/https://flask-babel.tkte.ch/">Flask-Babel</a></b></summary><br>
 
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
