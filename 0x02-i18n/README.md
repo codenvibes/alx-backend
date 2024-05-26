@@ -251,6 +251,23 @@ File: [5-app.py](), [templates/5-index.html]()
 
 <p>In your HTML template, if a user is logged in, in a paragraph tag, display a welcome message otherwise display a default message as shown in the table below.</p>
 
+<table class="hbtn-table"><tbody><tr>
+<th>msgid</th>
+<th>English</th>
+<th>French</th>
+</tr>
+<tr>
+<td><code>logged_in_as</code></td>
+<td><code>"You are logged in as %(username)s."</code></td>
+<td><code>"Vous êtes connecté en tant que %(username)s."</code></td>
+</tr>
+<tr>
+<td><code>not_logged_in</code></td>
+<td><code>"You are not logged in."</code></td>
+<td><code>"Vous n'êtes pas connecté."</code></td>
+</tr>
+</tbody></table>
+
 <p><strong>Visiting <code>http://127.0.0.1:5000/</code> in your browser should display this:</strong></p>
 
 <p><img alt="" loading="lazy" src="./Project_ 0x02. i18n _ Nairobi Intranet_files/2c5b2c8190f88c6b4668.png" style=""/></p>
