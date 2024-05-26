@@ -19,7 +19,7 @@ In this project, you learn different caching algorithms.
 
 ## Resources
 <details>
-<summary><b><a href="https://intranet.alxswe.com/rltoken/fjhr6EvFeF3mWwsPQXUKdQ">Cache replacement policies - FIFO</a></b></summary><br>
+<summary><b><a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#First_In_First_Out_%28FIFO%29">Cache replacement policies - FIFO</a></b></summary><br>
 
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
