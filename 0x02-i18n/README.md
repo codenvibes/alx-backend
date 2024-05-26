@@ -252,9 +252,9 @@ File: [5-app.py](), [templates/5-index.html]()
 <p>In your HTML template, if a user is logged in, in a paragraph tag, display a welcome message otherwise display a default message as shown in the table below.</p>
 
 <table class="hbtn-table"><tbody><tr>
-<th>msgid</th>
-<th>English</th>
-<th>French</th>
+<td><b>msgid</b></td>
+<td><b>English</b></td>
+<td><b>French</b></td>
 </tr>
 <tr>
 <td><code>logged_in_as</code></td>
