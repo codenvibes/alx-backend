@@ -1059,6 +1059,8 @@ File: [9-stock.js]()
 <li>Id: 4, name: <code>Suitcase 1050</code>, price: 550, stock: 5</li>
 </ul>
 
+### Data access
+
 <p>Create a function named <code>getItemById</code>:</p>
 
 <ul>
