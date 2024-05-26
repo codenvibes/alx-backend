@@ -700,7 +700,7 @@ guillaume@ubuntu:~/0x01$
 File: [100-lfu_cache.py]()
 </summary>
 
-Create a class LFUCache that inherits from BaseCaching and is a caching system:
+Create a class `LFUCache` that inherits from `BaseCaching` and is a caching system:
 
 You must use self.cache_data - dictionary from the parent class BaseCaching
 You can overload def __init__(self): but don’t forget to call the parent init: super().__init__()
