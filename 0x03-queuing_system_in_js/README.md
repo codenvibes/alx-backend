@@ -1048,6 +1048,8 @@ Notification job created: 2
 File: [9-stock.js]()
 </summary>
 
+### Data
+
 <p>Create an array <code>listProducts</code> containing the list of the following products:</p>
 
 <ul>
