@@ -211,7 +211,7 @@ Don’t forget to run <code>$ npm install</code> when you have the <code>package
 File: [README.md](), [dump.rdb]()
 </summary>
 
-<p>Download, extract, and compile the latest stable Redis version (higher than 5.0.7 - <a href="https://intranet.alxswe.com/rltoken/QDZIAT68ZH03R3pJY0ICOQ" target="_blank" title="https://redis.io/downloads/">https://redis.io/downloads/</a>):</p>
+<p>Download, extract, and compile the latest stable Redis version (higher than 5.0.7 - <a href="https://redis.io/downloads/" target="_blank" title="https://redis.io/downloads/">https://redis.io/downloads/</a>):</p>
 
 <pre><code>$ wget http://download.redis.io/releases/redis-6.0.10.tar.gz
 $ tar xzf redis-6.0.10.tar.gz
