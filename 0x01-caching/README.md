@@ -43,7 +43,7 @@ In this project, you learn different caching algorithms.
 
 
 <details>
-<summary><b><a href="https://intranet.alxswe.com/rltoken/Tmk4qEBZ7QTknvbpKabWfQ">Cache replacement policies - MRU</a></b></summary><br>
+<summary><b><a href="https://en.wikipedia.org/wiki/Cache_replacement_policies#Most_Recently_Used_%28MRU%29Q">Cache replacement policies - MRU</a></b></summary><br>
 
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
@@ -51,7 +51,7 @@ In this project, you learn different caching algorithms.
 
 
 <details>
-<summary><b><a href="https://intranet.alxswe.com/rltoken/8PEJ8L34bxhL2y--BW5zGQ">Cache replacement policies - LFU</a></b></summary><br>
+<summary><b><a href="en.wikipedia.org/wiki/Cache_replacement_policies#Least-Frequently_Used_%28LFU%29">Cache replacement policies - LFU</a></b></summary><br>
 
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
