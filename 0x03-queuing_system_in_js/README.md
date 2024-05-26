@@ -1153,7 +1153,6 @@ bob@dylan:~$
 <li>Make sure the format returned by the web application is always JSON and not text</li>
 </ul>
 
-
 </details>
 
 <details>
