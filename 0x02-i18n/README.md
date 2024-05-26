@@ -303,7 +303,7 @@ File: [6-app.py](), [templates/6-index.html]()
 
 <p>Test by logging in as different users</p>
 
-<div align="center"><img alt="" src="https://github.com/codenvibes/alx-backend/blob/master/0x02-i18n/images/9941b480b0b9d87dc5de.png%3AZone.Identifier" style=""/></div>
+<div align="center"><img alt="" src="https://github.com/codenvibes/alx-backend/blob/master/0x02-i18n/images/9941b480b0b9d87dc5de.png" style=""/></div>
 
 
 </details>
