@@ -41,7 +41,7 @@
 
 
 <details>
-<summary><b><a href="https://github.com/Automattic/kue">Kue</a></b> (<em>deprecated but still use in the industry</em>)</summary><br>
+<summary><b><a href="https://github.com/Automattic/kue">Kue</a></b> <em>deprecated but still use in the industry</em></summary><br>
 
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
