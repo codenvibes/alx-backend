@@ -145,6 +145,118 @@ This version provides more comprehensive pagination details, which can be useful
 <details>
 <summary><b><a href=" "> </a>How to paginate a dataset with hypermedia metadata</b></summary><br>
 
+Paginating a dataset with hypermedia metadata involves not only returning the data for the current page but also including additional information to help navigate through the pages. This typically includes links to the first, last, next, and previous pages, as well as information about the total number of pages and items.
+
+Here's an example implementation in Python:
+
+1. **Define the Pagination Function**:
+   Create a function that takes the dataset, the current page number, and the page size as parameters.
+
+2. **Calculate the Start and End Indices**:
+   Determine the indices for slicing the dataset to get the correct page.
+
+3. **Generate Hypermedia Links**:
+   Create links to the first, last, next, and previous pages.
+
+4. **Return the Paginated Data with Metadata**:
+   Include the paginated data and the hypermedia metadata in the response.
+
+Here's the complete implementation:
+
+```python
+def paginate_with_hypermedia(dataset, page, page_size, base_url):
+    total_items = len(dataset)
+    total_pages = (total_items + page_size - 1) // page_size  # Calculate total pages
+
+    # Ensure page is within the valid range
+    if page < 1 or page > total_pages:
+        return {
+            "data": [],
+            "page": page,
+            "page_size": page_size,
+            "total_pages": total_pages,
+            "total_items": total_items,
+            "links": {
+                "self": f"{base_url}?page={page}&page_size={page_size}",
+                "first": f"{base_url}?page=1&page_size={page_size}",
+                "last": f"{base_url}?page={total_pages}&page_size={page_size}",
+                "next": None,
+                "prev": None
+            }
+        }
+
+    # Calculate start and end indices for slicing the dataset
+    start_index = (page - 1) * page_size
+    end_index = start_index + page_size
+
+    # Generate hypermedia links
+    links = {
+        "self": f"{base_url}?page={page}&page_size={page_size}",
+        "first": f"{base_url}?page=1&page_size={page_size}",
+        "last": f"{base_url}?page={total_pages}&page_size={page_size}",
+        "next": f"{base_url}?page={page + 1}&page_size={page_size}" if page < total_pages else None,
+        "prev": f"{base_url}?page={page - 1}&page_size={page_size}" if page > 1 else None
+    }
+
+    # Return the paginated data along with additional information
+    return {
+        "data": dataset[start_index:end_index],
+        "page": page,
+        "page_size": page_size,
+        "total_pages": total_pages,
+        "total_items": total_items,
+        "links": links
+    }
+
+# Example usage
+dataset = list(range(1, 101))  # A sample dataset with 100 items
+page = 2
+page_size = 10
+base_url = "http://example.com/api/items"
+
+paginated_data = paginate_with_hypermedia(dataset, page, page_size, base_url)
+print(paginated_data)
+# Output:
+# {
+#   "data": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+#   "page": 2,
+#   "page_size": 10,
+#   "total_pages": 10,
+#   "total_items": 100,
+#   "links": {
+#       "self": "http://example.com/api/items?page=2&page_size=10",
+#       "first": "http://example.com/api/items?page=1&page_size=10",
+#       "last": "http://example.com/api/items?page=10&page_size=10",
+#       "next": "http://example.com/api/items?page=3&page_size=10",
+#       "prev": "http://example.com/api/items?page=1&page_size=10"
+#   }
+# }
+```
+
+### Explanation:
+
+1. **Input Validation**:
+   The function checks if `page` is within the valid range (between 1 and `total_pages`). If not, it returns an empty data set along with the appropriate metadata.
+
+2. **Calculate Indices**:
+   - `start_index` is calculated as `(page - 1) * page_size`.
+   - `end_index` is `start_index + page_size`.
+
+3. **Generate Hypermedia Links**:
+   - `self`: The URL for the current page.
+   - `first`: The URL for the first page.
+   - `last`: The URL for the last page.
+   - `next`: The URL for the next page, if it exists.
+   - `prev`: The URL for the previous page, if it exists.
+
+4. **Return the Data and Metadata**:
+   The function returns a dictionary containing the paginated data and the hypermedia metadata.
+
+### Edge Cases:
+- If `page` or `page_size` is invalid (e.g., negative or zero), the function returns an empty list with the correct hypermedia links.
+- If `page` is beyond the total number of pages, the function returns an empty data list but still includes the metadata and links.
+
+This approach ensures that the pagination is user-friendly and self-descriptive, making it easier to navigate through the dataset.
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
 </details>
