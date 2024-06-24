@@ -1,4 +1,4 @@
-<h1 align="center"><b>0X00. PAGINATION</b></h1>
+<h1 align="center"><b>0X00. <a href="https://github.com/codenvibes/alx-backend/blob/master/0x00-pagination/notes/pagination.md">PAGINATION</a></b></h1>
 <div align="center"><code>Back-end</code></div>
 
 <br>
