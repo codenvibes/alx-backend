@@ -265,6 +265,120 @@ This approach ensures that the pagination is user-friendly and self-descriptive,
 <details>
 <summary><b><a href=" "> </a>How to paginate in a deletion-resilient manner</b></summary><br>
 
+Paginating a dataset in a deletion-resilient manner requires handling cases where items in the dataset might be added or removed between page requests. This means the pagination logic needs to ensure that users see consistent results even if changes occur in the dataset.
+
+A common approach to achieve deletion-resilient pagination is to use a cursor-based pagination system rather than offset-based pagination. Cursor-based pagination uses a unique identifier (often a timestamp or an ID) to mark the position in the dataset, making it more robust to changes.
+
+Here's an example of how to implement deletion-resilient pagination using cursor-based pagination:
+
+1. **Define the Pagination Function**:
+   Create a function that takes the dataset, the cursor, and the page size as parameters.
+
+2. **Calculate the Start Position**:
+   Use the cursor to find the starting point in the dataset.
+
+3. **Generate the Next Cursor**:
+   Determine the cursor for the next page based on the last item of the current page.
+
+4. **Return the Paginated Data with Metadata**:
+   Include the paginated data and the cursor for the next page in the response.
+
+Here’s the complete implementation:
+
+```python
+def paginate_with_cursor(dataset, cursor=None, page_size=10):
+    # Ensure page_size is a positive integer
+    if page_size < 1:
+        return {
+            "data": [],
+            "cursor": cursor,
+            "next_cursor": None
+        }
+
+    # Sort the dataset by the unique identifier (assuming the dataset is a list of dicts with an 'id' field)
+    sorted_dataset = sorted(dataset, key=lambda x: x['id'])
+
+    # If a cursor is provided, find the start position in the dataset
+    if cursor:
+        start_index = next((i for i, item in enumerate(sorted_dataset) if item['id'] > cursor), 0)
+    else:
+        start_index = 0
+
+    # Calculate the end index for slicing the dataset
+    end_index = start_index + page_size
+
+    # Get the data for the current page
+    paginated_data = sorted_dataset[start_index:end_index]
+
+    # Determine the next cursor
+    next_cursor = paginated_data[-1]['id'] if paginated_data else None
+
+    # Return the paginated data along with the current and next cursors
+    return {
+        "data": paginated_data,
+        "cursor": cursor,
+        "next_cursor": next_cursor
+    }
+
+# Example usage
+dataset = [{"id": i, "value": f"Item {i}"} for i in range(1, 101)]  # A sample dataset with 100 items
+cursor = None  # Initial request, so no cursor
+page_size = 10
+
+paginated_data = paginate_with_cursor(dataset, cursor, page_size)
+print(paginated_data)
+# Output:
+# {
+#   "data": [{"id": 1, "value": "Item 1"}, {"id": 2, "value": "Item 2"}, ..., {"id": 10, "value": "Item 10"}],
+#   "cursor": None,
+#   "next_cursor": 10
+# }
+```
+
+### Explanation:
+
+1. **Input Validation**:
+   The function ensures that `page_size` is a positive integer. If not, it returns an empty data set with `None` for the cursors.
+
+2. **Sort the Dataset**:
+   The dataset is sorted by the unique identifier (assumed to be `'id'` in this example). This ensures consistent ordering.
+
+3. **Find the Start Position**:
+   If a cursor is provided, the function finds the starting position in the dataset by looking for the first item with an ID greater than the cursor. If no cursor is provided, it starts from the beginning.
+
+4. **Calculate the End Index**:
+   The end index is calculated as `start_index + page_size` to slice the dataset.
+
+5. **Determine the Next Cursor**:
+   The next cursor is set to the ID of the last item in the current page. If the current page is empty, the next cursor is `None`.
+
+6. **Return the Data and Cursors**:
+   The function returns a dictionary containing the paginated data, the current cursor, and the next cursor.
+
+### Handling Deletions:
+- If items are deleted from the dataset, the cursor-based approach ensures that the pagination remains consistent because it relies on unique IDs rather than fixed offsets.
+- If items are added to the dataset, they will appear in subsequent pagination requests based on their IDs.
+
+### Example with Deletions:
+To demonstrate how the function handles deletions, let's delete some items from the dataset and paginate again:
+
+```python
+# Remove some items from the dataset
+dataset = [item for item in dataset if item['id'] not in {3, 4, 5}]
+
+# Paginate again using the previous next_cursor as the new cursor
+cursor = paginated_data["next_cursor"]
+paginated_data = paginate_with_cursor(dataset, cursor, page_size)
+print(paginated_data)
+# Output:
+# {
+#   "data": [{"id": 11, "value": "Item 11"}, {"id": 12, "value": "Item 12"}, ..., {"id": 20, "value": "Item 20"}],
+#   "cursor": 10,
+#   "next_cursor": 20
+# }
+```
+
+In this example, the pagination continues smoothly despite the deletion of items, demonstrating the deletion-resilient nature of cursor-based pagination.
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
 </details>
