@@ -111,6 +111,141 @@ By using caching effectively, systems can deliver faster response times, handle 
 <details>
 <summary><b><a href=" "> </a>What FIFO means </b></summary><br>
 
+FIFO stands for "First In, First Out." It is a method of organizing and manipulating data relative to time and prioritization. In the context of data structures, queue management, and caching systems, FIFO operates on the principle that the first element added (the "first in") will be the first one to be removed (the "first out").
+
+### Key Concepts of FIFO
+
+1. **Order of Operations**: Elements are processed in the exact order they were added. This is similar to a line of people waiting for service, where the person who arrives first is served first.
+2. **Use in Data Structures**: FIFO is a fundamental principle behind queue data structures. In a queue, elements are enqueued at the back and dequeued from the front.
+3. **Cache Eviction Policy**: In caching systems, a FIFO eviction policy means that when the cache is full and needs to make room for new data, it removes the oldest data (the first one that was added) to free up space.
+
+### Applications of FIFO
+
+1. **Queue Data Structure**:
+   - **Enqueue Operation**: Adding an element to the back of the queue.
+   - **Dequeue Operation**: Removing an element from the front of the queue.
+   - Example: Handling tasks in a print queue where the first document sent to the printer is printed first.
+
+2. **Scheduling and Task Management**:
+   - Used in operating systems for task scheduling where the first task that arrives is executed first.
+   - Example: Round-robin scheduling in CPU task management.
+
+3. **Network Buffers**:
+   - Managing data packets in network routers where packets are processed in the order they arrive.
+   - Example: Buffering video streaming where data packets are played in the order they are received to ensure smooth playback.
+
+4. **Cache Eviction**:
+   - In a caching system, when new data needs to be added but the cache is full, the oldest data (first added) is evicted to make room.
+   - Example: Simple caching mechanisms where the cache does not prioritize frequently accessed data but rather maintains a straightforward order of entry.
+
+### Example of FIFO in Python
+
+Here’s a simple example of how FIFO can be implemented using a queue in Python:
+
+```python
+from collections import deque
+
+# Create a FIFO queue
+fifo_queue = deque()
+
+# Enqueue elements
+fifo_queue.append('first')
+fifo_queue.append('second')
+fifo_queue.append('third')
+
+# Dequeue elements
+print(fifo_queue.popleft())  # Outputs: 'first'
+print(fifo_queue.popleft())  # Outputs: 'second'
+print(fifo_queue.popleft())  # Outputs: 'third'
+```
+
+In this example, elements are added to the back of the queue and removed from the front, maintaining the FIFO order.
+
+### Benefits of FIFO
+
+1. **Predictability**: Ensures that operations are handled in a predictable manner.
+2. **Fairness**: Each element gets processed in the order it was added, preventing starvation of older elements.
+3. **Simplicity**: Easy to implement and understand, making it a practical choice for many applications.
+
+<br><p align="center">※※※※※※※※※※※※</p><br>
+
+A `deque` (short for "double-ended queue") is a data structure that allows insertion and removal of elements from both ends, making it more flexible than a standard queue or stack. In Python, the `deque` class is part of the `collections` module and provides an efficient way to handle such operations.
+
+### Key Features of `deque`
+
+1. **Double-Ended Operations**: You can append and pop elements from both ends (left and right).
+2. **Efficient O(1) Operations**: Most operations, such as appending and popping from either end, are O(1) time complexity.
+3. **Thread-Safe**: The `deque` implementation in Python is thread-safe for appends and pops, which means it can be used safely in multi-threaded applications without the need for additional locks.
+
+### Common Methods
+
+- **Appending Elements**:
+  - `append(x)`: Adds `x` to the right end.
+  - `appendleft(x)`: Adds `x` to the left end.
+  
+- **Removing Elements**:
+  - `pop()`: Removes and returns an element from the right end.
+  - `popleft()`: Removes and returns an element from the left end.
+
+- **Accessing Elements**:
+  - `extend(iterable)`: Extends the deque by appending elements from the iterable to the right end.
+  - `extendleft(iterable)`: Extends the deque by appending elements from the iterable to the left end (note that the order of elements will be reversed).
+
+- **Other Useful Methods**:
+  - `clear()`: Removes all elements from the deque.
+  - `rotate(n)`: Rotates the deque `n` steps to the right. If `n` is negative, rotates to the left.
+  - `maxlen`: An optional parameter that sets a maximum size for the deque. If the deque is full and new items are added, the oldest items are removed.
+
+### Example Usage of `deque`
+
+```python
+from collections import deque
+
+# Create a deque
+d = deque()
+
+# Append elements to the right end
+d.append('a')
+d.append('b')
+d.append('c')
+print(d)  # Outputs: deque(['a', 'b', 'c'])
+
+# Append elements to the left end
+d.appendleft('x')
+d.appendleft('y')
+print(d)  # Outputs: deque(['y', 'x', 'a', 'b', 'c'])
+
+# Pop elements from the right end
+print(d.pop())  # Outputs: 'c'
+print(d)  # Outputs: deque(['y', 'x', 'a', 'b'])
+
+# Pop elements from the left end
+print(d.popleft())  # Outputs: 'y'
+print(d)  # Outputs: deque(['x', 'a', 'b'])
+
+# Extend the deque with an iterable from the right end
+d.extend(['d', 'e', 'f'])
+print(d)  # Outputs: deque(['x', 'a', 'b', 'd', 'e', 'f'])
+
+# Extend the deque with an iterable from the left end
+d.extendleft(['u', 'v', 'w'])
+print(d)  # Outputs: deque(['w', 'v', 'u', 'x', 'a', 'b', 'd', 'e', 'f'])
+
+# Rotate the deque to the right by 3 steps
+d.rotate(3)
+print(d)  # Outputs: deque(['d', 'e', 'f', 'w', 'v', 'u', 'x', 'a', 'b'])
+
+# Rotate the deque to the left by 2 steps
+d.rotate(-2)
+print(d)  # Outputs: deque(['f', 'w', 'v', 'u', 'x', 'a', 'b', 'd', 'e'])
+```
+
+### Use Cases
+
+1. **Queue and Stack Implementations**: `deque` can be used to implement both queues (FIFO) and stacks (LIFO) efficiently.
+2. **Sliding Window**: Useful in algorithms that require a sliding window, like moving averages or max/min calculations over a range.
+3. **Buffer Management**: Ideal for scenarios requiring a fixed-size buffer, like keeping the last `n` items seen.
+4. **Task Scheduling**: Can be used to manage tasks where new tasks can be added and old tasks can be completed from both ends.
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
 </details>
