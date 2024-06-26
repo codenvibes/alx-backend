@@ -477,6 +477,102 @@ MRU is not as commonly used as LRU or FIFO but can be useful in specific scenari
 <details>
 <summary><b><a href=" "> </a>What LFU means</b></summary><br>
 
+LFU stands for "Least Frequently Used." It is a cache eviction policy that removes the least frequently accessed items first when the cache needs to free up space. The idea behind LFU is that items that have been accessed the least number of times are less likely to be needed again in the near future, making them suitable candidates for eviction.
+
+### Key Concepts of LFU
+
+1. **Frequency of Access**: Items are tracked based on how often they are accessed. The least frequently accessed item is the one that gets evicted first.
+2. **Cache Management**: LFU is used in cache management to maintain a balance between keeping frequently accessed items readily available and evicting less important items.
+
+### How LFU Works
+
+1. **Tracking Access Frequency**: The cache keeps track of how many times each item has been accessed. This can be done using various data structures such as dictionaries to count accesses.
+2. **Eviction**: When the cache reaches its capacity, the item with the lowest access frequency is evicted to make room for new items.
+
+### Example Implementation
+
+Here’s a basic example of how LFU can be implemented in Python using a combination of dictionaries to track item values and their access frequencies:
+
+```python
+from collections import defaultdict
+
+class LFUCache:
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.cache = {}  # Stores the key-value pairs
+        self.freq = defaultdict(int)  # Stores the access frequency of each key
+        self.least_freq = defaultdict(list)  # Stores the keys with the same frequency
+        self.min_freq = 0
+
+    def _update(self, key: int):
+        # Update the frequency of the accessed key
+        freq = self.freq[key]
+        self.least_freq[freq].remove(key)
+        if not self.least_freq[freq]:
+            if self.min_freq == freq:
+                self.min_freq += 1
+            del self.least_freq[freq]
+        self.freq[key] += 1
+        self.least_freq[freq + 1].append(key)
+
+    def get(self, key: int) -> int:
+        if key not in self.cache:
+            return -1
+        self._update(key)
+        return self.cache[key]
+
+    def put(self, key: int, value: int) -> None:
+        if self.capacity == 0:
+            return
+        if key in self.cache:
+            self.cache[key] = value
+            self._update(key)
+        else:
+            if len(self.cache) >= self.capacity:
+                # Evict the least frequently used item
+                lfu_key = self.least_freq[self.min_freq].pop(0)
+                if not self.least_freq[self.min_freq]:
+                    del self.least_freq[self.min_freq]
+                del self.cache[lfu_key]
+                del self.freq[lfu_key]
+            self.cache[key] = value
+            self.freq[key] = 1
+            self.min_freq = 1
+            self.least_freq[1].append(key)
+
+# Example usage
+lfu_cache = LFUCache(2)
+lfu_cache.put(1, 1)
+lfu_cache.put(2, 2)
+print(lfu_cache.get(1))  # Outputs: 1
+lfu_cache.put(3, 3)      # Evicts key 2 (least frequently used)
+print(lfu_cache.get(2))  # Outputs: -1 (not found)
+print(lfu_cache.get(3))  # Outputs: 3
+lfu_cache.put(4, 4)      # Evicts key 1 (least frequently used)
+print(lfu_cache.get(1))  # Outputs: -1 (not found)
+print(lfu_cache.get(3))  # Outputs: 3
+print(lfu_cache.get(4))  # Outputs: 4
+```
+
+In this example, the `LFUCache` class:
+- Uses a dictionary (`cache`) to store key-value pairs.
+- Uses a dictionary (`freq`) to track the access frequency of each key.
+- Uses a dictionary (`least_freq`) to maintain lists of keys with the same frequency.
+- Implements the `get` method to retrieve an item and update its access frequency.
+- Implements the `put` method to add a new item and evict the least frequently used item if necessary.
+
+### Benefits of LFU
+
+1. **Efficient Use of Cache**: By evicting the least frequently used items, LFU helps keep frequently accessed data in the cache.
+2. **Improved Performance**: Reduces the likelihood of cache misses for frequently accessed items, improving overall performance.
+3. **Fairness**: Ensures that frequently accessed items remain in the cache longer, providing a fair and balanced approach to cache management.
+
+### Applications of LFU
+
+1. **Database Caching**: Used in databases to keep frequently queried data in memory for quick access.
+2. **Content Delivery Networks (CDNs)**: Caching popular content closer to the user to reduce latency and improve load times.
+3. **Operating Systems**: Managing memory cache for file systems and virtual memory, ensuring that frequently accessed data is kept in RAM.
+4. **Web Browsers**: Caching web pages, images, and scripts so that frequently accessed content is readily available.
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
 </details>
