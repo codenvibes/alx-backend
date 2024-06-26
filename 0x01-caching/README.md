@@ -394,6 +394,81 @@ In this example, the `LRUCache` class:
 <details>
 <summary><b><a href=" "> </a>What MRU means</b></summary><br>
 
+MRU stands for "Most Recently Used." It is a cache eviction policy that removes the most recently used items first when the cache needs to free up space. The idea behind MRU is that the most recently accessed items are less likely to be needed again in the near future, which can be useful in specific scenarios where access patterns exhibit this behavior.
+
+### Key Concepts of MRU
+
+1. **Recency of Use**: Items are tracked based on their most recent access. The most recently accessed item is the one that gets evicted first.
+2. **Cache Management**: MRU is used in cache management to handle situations where it is beneficial to remove items that were recently accessed.
+
+### How MRU Works
+
+1. **Tracking Usage**: The cache keeps track of the order in which items are accessed, with a focus on the most recent accesses.
+2. **Updating Access Order**: Whenever an item is accessed (read or written), it is marked as the most recently used.
+3. **Eviction**: When the cache reaches its capacity, the item that is the most recently used is evicted to make room for new items.
+
+### Example Implementation
+
+While MRU is less common than other caching policies like LRU, it can be implemented using similar data structures. Here's a basic example of how MRU can be implemented in Python using a combination of a list and a dictionary:
+
+```python
+class MRUCache:
+    def __init__(self, capacity: int):
+        self.cache = {}
+        self.capacity = capacity
+        self.recently_used = []
+
+    def get(self, key: int) -> int:
+        if key not in self.cache:
+            return -1
+        # Move the accessed item to the end to show that it was recently used
+        self.recently_used.remove(key)
+        self.recently_used.append(key)
+        return self.cache[key]
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.cache:
+            # Update the value and move the item to the end
+            self.cache[key] = value
+            self.recently_used.remove(key)
+        elif len(self.cache) >= self.capacity:
+            # Evict the most recently used item
+            mru_key = self.recently_used.pop()
+            del self.cache[mru_key]
+        # Insert the item as the most recently used one
+        self.cache[key] = value
+        self.recently_used.append(key)
+
+# Example usage
+mru_cache = MRUCache(2)
+mru_cache.put(1, 1)
+mru_cache.put(2, 2)
+print(mru_cache.get(1))  # Outputs: 1
+mru_cache.put(3, 3)      # Evicts key 1 (most recently used)
+print(mru_cache.get(2))  # Outputs: -1 (not found)
+print(mru_cache.get(3))  # Outputs: 3
+mru_cache.put(4, 4)      # Evicts key 3 (most recently used)
+print(mru_cache.get(3))  # Outputs: -1 (not found)
+print(mru_cache.get(4))  # Outputs: 4
+```
+
+In this example, the `MRUCache` class:
+- Uses a dictionary (`cache`) to store key-value pairs.
+- Uses a list (`recently_used`) to keep track of the order of accesses.
+- Implements the `get` method to retrieve an item and update its access order.
+- Implements the `put` method to add a new item and evict the most recently used item if necessary.
+
+### Benefits of MRU
+
+1. **Handling Specific Access Patterns**: MRU can be beneficial in scenarios where the most recently accessed items are less likely to be reused soon, such as in certain types of algorithms or data processing tasks.
+2. **Predictable Eviction**: Provides a clear and predictable method for deciding which items to evict from the cache.
+
+### Applications of MRU
+
+MRU is not as commonly used as LRU or FIFO but can be useful in specific scenarios where the access pattern justifies its use:
+
+1. **Data Processing**: In some data processing tasks, the most recently processed data may not need to be retained, making MRU a suitable eviction policy.
+2. **Algorithmic Cache Management**: Certain algorithms might benefit from MRU when recent access patterns suggest that the most recently used data is less valuable.
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
 </details>
