@@ -312,6 +312,80 @@ In this example, elements are added to the end of the list (top of the stack) an
 <details>
 <summary><b><a href=" "> </a>What LRU means</b></summary><br>
 
+LRU stands for "Least Recently Used." It is a cache eviction policy that removes the least recently used items first when the cache reaches its capacity and needs to make room for new items. The idea is that items that haven't been used recently are less likely to be used in the near future, so they are the best candidates for removal.
+
+### Key Concepts of LRU
+
+1. **Recency of Use**: Items are tracked based on when they were last accessed or used. The least recently accessed item is the one that gets evicted first.
+2. **Cache Management**: LRU is commonly used in cache management to maintain a balance between keeping frequently accessed items readily available and evicting less important items.
+
+### How LRU Works
+
+1. **Tracking Usage**: The cache keeps track of the order in which items are accessed. This can be done using various data structures like linked lists combined with hash maps.
+2. **Updating Access Order**: Whenever an item is accessed (read or written), it is moved to the most recently used position.
+3. **Eviction**: When the cache reaches its capacity, the item that is the least recently used is evicted to make room for new items.
+
+### Example Implementation
+
+In Python, LRU can be implemented using the `OrderedDict` from the `collections` module, which maintains the order of items based on insertion and allows reordering.
+
+Here's a basic example of an LRU cache:
+
+```python
+from collections import OrderedDict
+
+class LRUCache:
+    def __init__(self, capacity: int):
+        self.cache = OrderedDict()
+        self.capacity = capacity
+
+    def get(self, key: int) -> int:
+        if key not in self.cache:
+            return -1
+        # Move the accessed item to the end to show that it was recently used
+        self.cache.move_to_end(key)
+        return self.cache[key]
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.cache:
+            # Remove the old value
+            del self.cache[key]
+        elif len(self.cache) >= self.capacity:
+            # Remove the first (least recently used) item
+            self.cache.popitem(last=False)
+        # Insert the item as the most recently used one
+        self.cache[key] = value
+
+# Example usage
+lru_cache = LRUCache(2)
+lru_cache.put(1, 1)
+lru_cache.put(2, 2)
+print(lru_cache.get(1))  # Outputs: 1
+lru_cache.put(3, 3)      # Evicts key 2
+print(lru_cache.get(2))  # Outputs: -1 (not found)
+lru_cache.put(4, 4)      # Evicts key 1
+print(lru_cache.get(1))  # Outputs: -1 (not found)
+print(lru_cache.get(3))  # Outputs: 3
+print(lru_cache.get(4))  # Outputs: 4
+```
+
+In this example, the `LRUCache` class:
+- Uses an `OrderedDict` to maintain the order of elements based on their access.
+- Implements the `get` method to retrieve an item and mark it as recently used.
+- Implements the `put` method to add a new item, evicting the least recently used item if necessary.
+
+### Benefits of LRU
+
+1. **Efficient Use of Cache**: By evicting the least recently used items, LRU helps keep frequently accessed data in the cache.
+2. **Improved Performance**: Reduces the likelihood of cache misses for recently accessed items, improving overall performance.
+3. **Simplicity**: LRU is relatively straightforward to implement and understand compared to more complex cache eviction policies.
+
+### Applications of LRU
+
+1. **Web Browsers**: Caching web pages, images, and scripts so that recently accessed content is readily available.
+2. **Operating Systems**: Managing the memory cache for file systems and virtual memory, ensuring that recently accessed data is kept in RAM.
+3. **Databases**: Implementing LRU for query result caching to improve response times for frequently run queries.
+4. **Content Delivery Networks (CDNs)**: Caching content closer to the user to reduce latency and improve load times.
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
 </details>
