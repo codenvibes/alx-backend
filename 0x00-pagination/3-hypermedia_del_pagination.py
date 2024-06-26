@@ -8,6 +8,7 @@ names.
 import csv
 from typing import List, Dict, Any
 
+
 class Server:
     """Server class to paginate a database of popular baby names.
     """
@@ -54,8 +55,8 @@ class Server:
                 - "next_index" (int): The index of the next portion to
                   retrieve.
         """
-        assert type(index) == int
-        assert type(page_size) == int
+        assert type(index) is int
+        assert type(page_size) is int
         csv = self.indexed_dataset()
         csv_size = len(csv)
         assert 0 <= index < csv_size
