@@ -669,6 +669,152 @@ These examples demonstrate how to perform various hash operations in Redis using
 <details>
 <summary><b><a href=" "> </a>How to deal with async operations with Redis</b></summary><br>
 
+Dealing with asynchronous operations in Node.js, including those involving Redis, requires using either callbacks, promises, or async/await. The `redis` client library supports both callbacks and promises. Here's how you can handle asynchronous operations with Redis in a Node.js application:
+
+### Using Callbacks
+
+Using callbacks is the traditional way to handle asynchronous operations in Node.js. Each Redis operation accepts a callback function that is executed once the operation is complete.
+
+```javascript
+const redis = require('redis');
+const client = redis.createClient();
+
+client.on('error', (err) => {
+  console.error('Error connecting to Redis', err);
+});
+
+client.on('connect', () => {
+  console.log('Connected to Redis');
+
+  // Set a key-value pair
+  client.set('mykey', 'Hello, Redis!', (err, reply) => {
+    if (err) throw err;
+    console.log(reply); // Output: OK
+
+    // Get the value of the key
+    client.get('mykey', (err, reply) => {
+      if (err) throw err;
+      console.log(reply); // Output: Hello, Redis!
+
+      // Close the connection
+      client.quit();
+    });
+  });
+});
+```
+
+### Using Promises
+
+The `redis` client supports promises out of the box. You can convert the client methods to return promises using `util.promisify` or by using a promise-based wrapper library like `async-redis`.
+
+#### Using `util.promisify`
+
+```javascript
+const redis = require('redis');
+const { promisify } = require('util');
+
+const client = redis.createClient();
+
+const getAsync = promisify(client.get).bind(client);
+const setAsync = promisify(client.set).bind(client);
+
+client.on('error', (err) => {
+  console.error('Error connecting to Redis', err);
+});
+
+client.on('connect', async () => {
+  console.log('Connected to Redis');
+
+  try {
+    await setAsync('mykey', 'Hello, Redis!');
+    console.log('Key set');
+
+    const value = await getAsync('mykey');
+    console.log(value); // Output: Hello, Redis!
+
+    // Close the connection
+    client.quit();
+  } catch (err) {
+    console.error('Error:', err);
+  }
+});
+```
+
+#### Using `async-redis`
+
+First, install `async-redis`:
+
+```bash
+npm install async-redis
+```
+
+Then use it in your code:
+
+```javascript
+const asyncRedis = require('async-redis');
+const client = asyncRedis.createClient();
+
+client.on('error', (err) => {
+  console.error('Error connecting to Redis', err);
+});
+
+client.on('connect', async () => {
+  console.log('Connected to Redis');
+
+  try {
+    await client.set('mykey', 'Hello, Redis!');
+    console.log('Key set');
+
+    const value = await client.get('mykey');
+    console.log(value); // Output: Hello, Redis!
+
+    // Close the connection
+    client.quit();
+  } catch (err) {
+    console.error('Error:', err);
+  }
+});
+```
+
+### Using Async/Await
+
+Async/await provides a cleaner and more readable way to work with asynchronous operations in modern JavaScript.
+
+```javascript
+const redis = require('redis');
+const { promisify } = require('util');
+
+const client = redis.createClient();
+
+const getAsync = promisify(client.get).bind(client);
+const setAsync = promisify(client.set).bind(client);
+
+client.on('error', (err) => {
+  console.error('Error connecting to Redis', err);
+});
+
+const run = async () => {
+  try {
+    await setAsync('mykey', 'Hello, Redis!');
+    console.log('Key set');
+
+    const value = await getAsync('mykey');
+    console.log(value); // Output: Hello, Redis!
+
+    // Close the connection
+    client.quit();
+  } catch (err) {
+    console.error('Error:', err);
+  }
+};
+
+client.on('connect', () => {
+  console.log('Connected to Redis');
+  run();
+});
+```
+
+By using async/await, you can handle Redis operations in a more synchronous-looking manner, which often makes the code easier to read and maintain.
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
 </details>
