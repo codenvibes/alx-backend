@@ -823,6 +823,203 @@ By using async/await, you can handle Redis operations in a more synchronous-look
 <details>
 <summary><b><a href=" "> </a>How to use Kue as a queue system</b></summary><br>
 
+Kue is a priority job queue for Node.js backed by Redis. It provides a simple way to manage job queues with support for retries, job events, and job lifecycle management. Here's how to use Kue as a queue system:
+
+### Step 1: Install Kue and Redis
+
+First, you need to install Kue and Redis. Ensure Redis is installed and running on your machine. Then, install Kue using npm:
+
+```bash
+npm install kue
+```
+
+### Step 2: Create a Job Queue
+
+Create a JavaScript file (e.g., `queue.js`) and set up Kue to create and process jobs.
+
+```javascript
+const kue = require('kue');
+const queue = kue.createQueue();
+
+// Create a job
+const job = queue.create('email', {
+  title: 'Welcome email for new user',
+  to: 'user@example.com',
+  template: 'welcome-email'
+}).save((err) => {
+  if (!err) console.log(`Job saved with id: ${job.id}`);
+});
+
+// Process jobs
+queue.process('email', (job, done) => {
+  sendEmail(job.data, done);
+});
+
+// Function to simulate sending an email
+function sendEmail(data, done) {
+  console.log(`Sending email to: ${data.to}`);
+  console.log(`Using template: ${data.template}`);
+  // Simulate async email sending with a timeout
+  setTimeout(() => {
+    console.log('Email sent!');
+    done();
+  }, 3000);
+}
+```
+
+### Step 3: Run the Script
+
+Run the script using Node.js:
+
+```bash
+node queue.js
+```
+
+### Step 4: Handling Job Events
+
+Kue provides various events to monitor job lifecycle. You can handle these events to add more control and logging.
+
+```javascript
+const kue = require('kue');
+const queue = kue.createQueue();
+
+// Create a job
+const job = queue.create('email', {
+  title: 'Welcome email for new user',
+  to: 'user@example.com',
+  template: 'welcome-email'
+}).save((err) => {
+  if (!err) console.log(`Job saved with id: ${job.id}`);
+});
+
+// Process jobs
+queue.process('email', (job, done) => {
+  sendEmail(job.data, done);
+});
+
+// Function to simulate sending an email
+function sendEmail(data, done) {
+  console.log(`Sending email to: ${data.to}`);
+  console.log(`Using template: ${data.template}`);
+  // Simulate async email sending with a timeout
+  setTimeout(() => {
+    console.log('Email sent!');
+    done();
+  }, 3000);
+}
+
+// Job events
+job.on('complete', () => {
+  console.log('Job completed');
+}).on('failed', (err) => {
+  console.log('Job failed');
+}).on('progress', (progress, data) => {
+  console.log(`\r  job #${job.id} ${progress}% complete with data `, data);
+});
+```
+
+### Step 5: Adding Job Retry Logic
+
+You can configure jobs to retry on failure.
+
+```javascript
+const kue = require('kue');
+const queue = kue.createQueue();
+
+// Create a job
+const job = queue.create('email', {
+  title: 'Welcome email for new user',
+  to: 'user@example.com',
+  template: 'welcome-email'
+})
+.attempts(3) // Retry up to 3 times
+.backoff({type: 'exponential'}) // Exponential backoff
+.save((err) => {
+  if (!err) console.log(`Job saved with id: ${job.id}`);
+});
+
+// Process jobs
+queue.process('email', (job, done) => {
+  sendEmail(job.data, done);
+});
+
+// Function to simulate sending an email
+function sendEmail(data, done) {
+  console.log(`Sending email to: ${data.to}`);
+  console.log(`Using template: ${data.template}`);
+  // Simulate async email sending with a timeout
+  setTimeout(() => {
+    console.log('Email sent!');
+    done();
+  }, 3000);
+}
+
+// Job events
+job.on('complete', () => {
+  console.log('Job completed');
+}).on('failed', (err) => {
+  console.log('Job failed');
+}).on('progress', (progress, data) => {
+  console.log(`\r  job #${job.id} ${progress}% complete with data `, data);
+});
+```
+
+### Step 6: Monitoring Jobs with Kue UI
+
+Kue also provides a built-in UI to monitor job queues. Install the Kue UI package:
+
+```bash
+npm install kue-ui
+```
+
+Then, set up the Kue UI in your script:
+
+```javascript
+const kue = require('kue');
+const kueUi = require('kue-ui');
+const express = require('express');
+const app = express();
+
+kueUi.setup({
+  apiURL: '/api', // IMPORTANT: specify the api url
+  baseURL: '/kue', // IMPORTANT: specify the base url
+  updateInterval: 5000 // Optional: Fetches new data every 5000 ms
+});
+
+app.use('/api', kue.app);
+app.use('/kue', kueUi.app);
+
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
+
+const queue = kue.createQueue();
+
+queue.process('email', (job, done) => {
+  sendEmail(job.data, done);
+});
+
+function sendEmail(data, done) {
+  console.log(`Sending email to: ${data.to}`);
+  console.log(`Using template: ${data.template}`);
+  setTimeout(() => {
+    console.log('Email sent!');
+    done();
+  }, 3000);
+}
+
+const job = queue.create('email', {
+  title: 'Welcome email for new user',
+  to: 'user@example.com',
+  template: 'welcome-email'
+}).save((err) => {
+  if (!err) console.log(`Job saved with id: ${job.id}`);
+});
+```
+
+Now, you can monitor your jobs by navigating to `http://localhost:3000/kue`.
+
+These steps should help you get started with using Kue as a queue system in your Node.js application. If you need further assistance or have specific requirements, feel free to ask!
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
 </details>
@@ -831,6 +1028,276 @@ By using async/await, you can handle Redis operations in a more synchronous-look
 <details>
 <summary><b><a href=" "> </a>How to build a basic Express app interacting with a Redis server</b></summary><br>
 
+Building a basic Express app that interacts with a Redis server involves setting up the Express framework, connecting to Redis, and performing basic operations such as setting and getting values. Here’s a step-by-step guide:
+
+### Step 1: Install Dependencies
+
+First, you need to install Express and Redis packages. Make sure Redis is installed and running on your machine.
+
+```bash
+npm install express redis
+```
+
+### Step 2: Set Up the Express Server
+
+Create a JavaScript file (e.g., `app.js`) and set up the basic structure of an Express server.
+
+```javascript
+const express = require('express');
+const redis = require('redis');
+
+const app = express();
+const port = 3000;
+
+// Create a Redis client
+const client = redis.createClient();
+
+client.on('error', (err) => {
+  console.error('Error connecting to Redis:', err);
+});
+
+client.on('connect', () => {
+  console.log('Connected to Redis');
+});
+
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// Set a key-value pair in Redis
+app.post('/set', (req, res) => {
+  const { key, value } = req.body;
+
+  client.set(key, value, (err, reply) => {
+    if (err) {
+      return res.status(500).send('Error setting value');
+    }
+    res.send(`Value set: ${reply}`);
+  });
+});
+
+// Get a value by key from Redis
+app.get('/get/:key', (req, res) => {
+  const { key } = req.params;
+
+  client.get(key, (err, reply) => {
+    if (err) {
+      return res.status(500).send('Error getting value');
+    }
+    if (reply === null) {
+      return res.status(404).send('Key not found');
+    }
+    res.send(`Value: ${reply}`);
+  });
+});
+
+// Start the Express server
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
+```
+
+### Step 3: Running the Express App
+
+Run your Express app using Node.js:
+
+```bash
+node app.js
+```
+
+### Step 4: Test the API
+
+You can use tools like Postman or curl to test the API endpoints.
+
+#### Setting a Key-Value Pair
+
+Use a POST request to set a value:
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"key":"myKey","value":"myValue"}' http://localhost:3000/set
+```
+
+#### Getting a Value by Key
+
+Use a GET request to retrieve the value:
+
+```bash
+curl http://localhost:3000/get/myKey
+```
+
+### Additional Functionality
+
+You can extend your Express app to include more Redis operations such as deleting keys, setting expiration times, or handling hashes.
+
+#### Deleting a Key
+
+```javascript
+// Delete a key
+app.delete('/delete/:key', (req, res) => {
+  const { key } = req.params;
+
+  client.del(key, (err, reply) => {
+    if (err) {
+      return res.status(500).send('Error deleting key');
+    }
+    if (reply === 0) {
+      return res.status(404).send('Key not found');
+    }
+    res.send(`Key deleted: ${key}`);
+  });
+});
+```
+
+#### Setting an Expiration Time for a Key
+
+```javascript
+// Set a key with an expiration time
+app.post('/setex', (req, res) => {
+  const { key, value, seconds } = req.body;
+
+  client.setex(key, seconds, value, (err, reply) => {
+    if (err) {
+      return res.status(500).send('Error setting value with expiration');
+    }
+    res.send(`Value set with expiration: ${reply}`);
+  });
+});
+```
+
+#### Handling Hashes
+
+```javascript
+// Set fields in a hash
+app.post('/hashset', (req, res) => {
+  const { key, field, value } = req.body;
+
+  client.hset(key, field, value, (err, reply) => {
+    if (err) {
+      return res.status(500).send('Error setting hash value');
+    }
+    res.send(`Hash value set: ${reply}`);
+  });
+});
+
+// Get a field from a hash
+app.get('/hashget/:key/:field', (req, res) => {
+  const { key, field } = req.params;
+
+  client.hget(key, field, (err, reply) => {
+    if (err) {
+      return res.status(500).send('Error getting hash value');
+    }
+    if (reply === null) {
+      return res.status(404).send('Field not found');
+    }
+    res.send(`Hash value: ${reply}`);
+  });
+});
+```
+
+### Complete Example
+
+Here is the complete example with additional functionalities included:
+
+```javascript
+const express = require('express');
+const redis = require('redis');
+
+const app = express();
+const port = 3000;
+
+const client = redis.createClient();
+
+client.on('error', (err) => {
+  console.error('Error connecting to Redis:', err);
+});
+
+client.on('connect', () => {
+  console.log('Connected to Redis');
+});
+
+app.use(express.json());
+
+app.post('/set', (req, res) => {
+  const { key, value } = req.body;
+
+  client.set(key, value, (err, reply) => {
+    if (err) {
+      return res.status(500).send('Error setting value');
+    }
+    res.send(`Value set: ${reply}`);
+  });
+});
+
+app.get('/get/:key', (req, res) => {
+  const { key } = req.params;
+
+  client.get(key, (err, reply) => {
+    if (err) {
+      return res.status(500).send('Error getting value');
+    }
+    if (reply === null) {
+      return res.status(404).send('Key not found');
+    }
+    res.send(`Value: ${reply}`);
+  });
+});
+
+app.delete('/delete/:key', (req, res) => {
+  const { key } = req.params;
+
+  client.del(key, (err, reply) => {
+    if (err) {
+      return res.status(500).send('Error deleting key');
+    }
+    if (reply === 0) {
+      return res.status(404).send('Key not found');
+    }
+    res.send(`Key deleted: ${key}`);
+  });
+});
+
+app.post('/setex', (req, res) => {
+  const { key, value, seconds } = req.body;
+
+  client.setex(key, seconds, value, (err, reply) => {
+    if (err) {
+      return res.status(500).send('Error setting value with expiration');
+    }
+    res.send(`Value set with expiration: ${reply}`);
+  });
+});
+
+app.post('/hashset', (req, res) => {
+  const { key, field, value } = req.body;
+
+  client.hset(key, field, value, (err, reply) => {
+    if (err) {
+      return res.status(500).send('Error setting hash value');
+    }
+    res.send(`Hash value set: ${reply}`);
+  });
+});
+
+app.get('/hashget/:key/:field', (req, res) => {
+  const { key, field } = req.params;
+
+  client.hget(key, field, (err, reply) => {
+    if (err) {
+      return res.status(500).send('Error getting hash value');
+    }
+    if (reply === null) {
+      return res.status(404).send('Field not found');
+    }
+    res.send(`Hash value: ${reply}`);
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
+```
+
+This should give you a good starting point for building an Express app that interacts with a Redis server. If you have any further questions or need additional features, feel free to ask!
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
 </details>
@@ -839,6 +1306,190 @@ By using async/await, you can handle Redis operations in a more synchronous-look
 <details>
 <summary><b><a href=" "> </a>How to the build a basic Express app interacting with a Redis server and queue</b></summary><br>
 
+Building a basic Express app that interacts with both a Redis server and a job queue system can be done using Kue for job queue management. Here's a step-by-step guide to set up an Express app with Redis and Kue:
+
+### Step 1: Install Dependencies
+
+First, install the required packages using npm:
+
+```bash
+npm install express redis kue
+```
+
+### Step 2: Set Up the Express Server with Redis and Kue
+
+Create a JavaScript file (e.g., `app.js`) and set up the basic structure of an Express server, connecting to Redis and Kue.
+
+```javascript
+const express = require('express');
+const redis = require('redis');
+const kue = require('kue');
+
+const app = express();
+const port = 3000;
+
+// Create a Redis client
+const client = redis.createClient();
+
+client.on('error', (err) => {
+  console.error('Error connecting to Redis:', err);
+});
+
+client.on('connect', () => {
+  console.log('Connected to Redis');
+});
+
+// Create a Kue job queue
+const queue = kue.createQueue();
+
+queue.on('error', (err) => {
+  console.error('Error with the Kue queue:', err);
+});
+
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// Set a key-value pair in Redis
+app.post('/set', (req, res) => {
+  const { key, value } = req.body;
+
+  client.set(key, value, (err, reply) => {
+    if (err) {
+      return res.status(500).send('Error setting value');
+    }
+    res.send(`Value set: ${reply}`);
+  });
+});
+
+// Get a value by key from Redis
+app.get('/get/:key', (req, res) => {
+  const { key } = req.params;
+
+  client.get(key, (err, reply) => {
+    if (err) {
+      return res.status(500).send('Error getting value');
+    }
+    if (reply === null) {
+      return res.status(404).send('Key not found');
+    }
+    res.send(`Value: ${reply}`);
+  });
+});
+
+// Create a job in the queue
+app.post('/job', (req, res) => {
+  const { type, data } = req.body;
+
+  const job = queue.create(type, data)
+    .save((err) => {
+      if (!err) console.log(`Job saved with id: ${job.id}`);
+      res.send(`Job created with id: ${job.id}`);
+    });
+
+  job.on('complete', () => {
+    console.log(`Job ${job.id} completed`);
+  }).on('failed', (err) => {
+    console.log(`Job ${job.id} failed: ${err}`);
+  }).on('progress', (progress) => {
+    console.log(`Job ${job.id} ${progress}% complete`);
+  });
+});
+
+// Process jobs from the queue
+queue.process('email', (job, done) => {
+  sendEmail(job.data, done);
+});
+
+// Function to simulate sending an email
+function sendEmail(data, done) {
+  console.log(`Sending email to: ${data.to}`);
+  console.log(`Using template: ${data.template}`);
+  // Simulate async email sending with a timeout
+  setTimeout(() => {
+    console.log('Email sent!');
+    done();
+  }, 3000);
+}
+
+// Start the Express server
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
+```
+
+### Step 3: Running the Express App
+
+Run your Express app using Node.js:
+
+```bash
+node app.js
+```
+
+### Step 4: Test the API
+
+You can use tools like Postman or curl to test the API endpoints.
+
+#### Setting a Key-Value Pair in Redis
+
+Use a POST request to set a value:
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"key":"myKey","value":"myValue"}' http://localhost:3000/set
+```
+
+#### Getting a Value by Key from Redis
+
+Use a GET request to retrieve the value:
+
+```bash
+curl http://localhost:3000/get/myKey
+```
+
+#### Creating a Job in the Queue
+
+Use a POST request to create a job:
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"type":"email","data":{"to":"user@example.com","template":"welcome-email"}}' http://localhost:3000/job
+```
+
+### Step 5: Monitoring Jobs with Kue UI (Optional)
+
+Kue provides a built-in UI to monitor job queues. Install the Kue UI package:
+
+```bash
+npm install kue-ui
+```
+
+Set up the Kue UI in your script:
+
+```javascript
+const kueUi = require('kue-ui');
+const express = require('express');
+const app = express();
+const kue = require('kue');
+
+kueUi.setup({
+  apiURL: '/api', // IMPORTANT: specify the api url
+  baseURL: '/kue', // IMPORTANT: specify the base url
+  updateInterval: 5000 // Optional: Fetches new data every 5000 ms
+});
+
+app.use('/api', kue.app);
+app.use('/kue', kueUi.app);
+
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
+
+const queue = kue.createQueue();
+
+// Other code remains the same
+```
+
+Now, you can monitor your jobs by navigating to `http://localhost:3000/kue`.
+
+This should give you a good starting point for building an Express app that interacts with a Redis server and manages job queues with Kue. If you need further assistance or have specific requirements, feel free to ask!
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
 </details>
