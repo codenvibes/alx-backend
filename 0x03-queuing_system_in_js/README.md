@@ -1629,7 +1629,7 @@ OK
 </code></pre>
 
 
-<p>Copy the <code>dump.rdb</code> from the <code>redis-5.0.7</code> directory into the root of the Queuing project.</p>
+<p><a href="https://github.com/codenvibes/alx-backend/blob/master/0x03-queuing_system_in_js/notes/How%20to%20find%20the%20redis%20dump.rdb%20file%20on%20linux.md">Copy the <code>dump.rdb</code></a> from the <code>redis-5.0.7</code> directory into the root of the Queuing project.</p>
 
 
 <p>Requirements:</p>
