@@ -525,6 +525,142 @@ These examples should help you get started with using Redis in your Node.js appl
 <details>
 <summary><b><a href=" "> </a>How to store hash values in Redis</b></summary><br>
 
+Storing hash values in Redis is useful when you need to manage objects or data structures with multiple fields. Redis hashes are a perfect data type for storing a collection of key-value pairs. Here's how to store and manage hash values in Redis using the Redis client for Node.js:
+
+### Step 1: Install Redis and Node.js
+
+Ensure you have Redis and Node.js installed on your machine.
+
+### Step 2: Install the `redis` package
+
+Install the Redis package using npm:
+
+```bash
+npm install redis
+```
+
+### Step 3: Create a Node.js Script
+
+Create a JavaScript file (e.g., `hash_example.js`) and use the following code to perform hash operations:
+
+```javascript
+const redis = require('redis');
+
+// Create a Redis client
+const client = redis.createClient();
+
+// Handle connection errors
+client.on('error', (err) => {
+  console.error('Error connecting to Redis', err);
+});
+
+// Perform hash operations
+client.on('connect', () => {
+  console.log('Connected to Redis');
+
+  // Set fields in a hash
+  client.hset('user:1000', 'name', 'John Doe', 'email', 'john.doe@example.com', 'age', '30', (err, reply) => {
+    if (err) throw err;
+    console.log(reply); // Output: 3 (number of fields that were added)
+
+    // Get a specific field from the hash
+    client.hget('user:1000', 'name', (err, reply) => {
+      if (err) throw err;
+      console.log(reply); // Output: John Doe
+
+      // Get all fields and values from the hash
+      client.hgetall('user:1000', (err, reply) => {
+        if (err) throw err;
+        console.log(reply); // Output: { name: 'John Doe', email: 'john.doe@example.com', age: '30' }
+
+        // Increment a numeric field in the hash
+        client.hincrby('user:1000', 'age', 1, (err, reply) => {
+          if (err) throw err;
+          console.log(reply); // Output: 31 (new value of the 'age' field)
+
+          // Delete a specific field from the hash
+          client.hdel('user:1000', 'email', (err, reply) => {
+            if (err) throw err;
+            console.log(reply); // Output: 1 (number of fields that were removed)
+
+            // Check if a field exists in the hash
+            client.hexists('user:1000', 'email', (err, reply) => {
+              if (err) throw err;
+              console.log(reply); // Output: 0 (field does not exist)
+
+              // Close the connection
+              client.quit();
+            });
+          });
+        });
+      });
+    });
+  });
+});
+```
+
+### Step 4: Run the Script
+
+Run the script using Node.js:
+
+```bash
+node hash_example.js
+```
+
+### Additional Hash Operations
+
+Here are some additional hash operations you can perform using the Node.js Redis client:
+
+1. **Set multiple fields in a hash using `hmset`:**
+
+   ```javascript
+   client.hmset('user:1001', {
+     name: 'Jane Doe',
+     email: 'jane.doe@example.com',
+     age: '28'
+   }, (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: OK
+   });
+   ```
+
+2. **Get multiple fields from a hash using `hmget`:**
+
+   ```javascript
+   client.hmget('user:1001', 'name', 'email', (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: [ 'Jane Doe', 'jane.doe@example.com' ]
+   });
+   ```
+
+3. **Get the number of fields in a hash using `hlen`:**
+
+   ```javascript
+   client.hlen('user:1001', (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: 3 (number of fields in the hash)
+   });
+   ```
+
+4. **Get all field names in a hash using `hkeys`:**
+
+   ```javascript
+   client.hkeys('user:1001', (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: [ 'name', 'email', 'age' ]
+   });
+   ```
+
+5. **Get all values in a hash using `hvals`:**
+
+   ```javascript
+   client.hvals('user:1001', (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: [ 'Jane Doe', 'jane.doe@example.com', '28' ]
+   });
+   ```
+
+These examples demonstrate how to perform various hash operations in Redis using the Node.js Redis client. If you have any specific requirements or encounter any issues, feel free to ask for further assistance!
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
 </details>
