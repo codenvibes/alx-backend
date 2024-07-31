@@ -1630,7 +1630,7 @@ OK
 
 
 <!-- --------------------------------------------Notes Start--------------------------------------------  -->
-<details><summary>How to kill the Redis server using its process ID (PID)</summary><br>
+><details><summary>How to kill the Redis server using its process ID (PID)</summary><br>
 
 To kill the Redis server using its process ID (PID), you need to follow these steps:
 
@@ -1700,7 +1700,7 @@ Replace `<PID>` with the actual process ID of the Redis server.
 <p>Copy the <code>dump.rdb</code> from the <code>redis-5.0.7</code> directory into the root of the Queuing project.</p>
 
 <!-- --------------------------------------------Notes Start-------------------------------------------- -->
-<details><summary>How to find the redis <code>dump.rdb</code> file on linux</summary><br>
+><details><summary>How to find the redis <code>dump.rdb</code> file on linux</summary><br>
 
 The `dump.rdb` file is the default location where Redis stores its snapshot of the data set, which is used for persistence. By default, this file is located in the directory specified by the `dir` configuration parameter in the Redis configuration file (`redis.conf`). The exact location can vary depending on how Redis was installed and configured on your system.
 
