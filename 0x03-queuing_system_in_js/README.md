@@ -364,6 +364,159 @@ These examples cover the basic operations you can perform with Redis using the R
 <details>
 <summary><b><a href=" "> </a>How to use a Redis client with Node JS for basic operations</b></summary><br>
 
+To use Redis with Node.js, you need to install the `redis` package and then use it to perform basic operations. Below are the steps and examples to get you started:
+
+### Step 1: Install Redis and Node.js
+
+Ensure that you have Redis and Node.js installed on your machine. If not, follow the installation instructions provided in the previous messages.
+
+### Step 2: Install the `redis` package
+
+You can install the `redis` package using npm:
+
+```bash
+npm install redis
+```
+
+### Step 3: Create a Node.js Script
+
+Create a JavaScript file (e.g., `app.js`) and use the following code to perform basic Redis operations:
+
+```javascript
+const redis = require('redis');
+
+// Create a Redis client
+const client = redis.createClient();
+
+// Handle connection errors
+client.on('error', (err) => {
+  console.error('Error connecting to Redis', err);
+});
+
+// Perform basic operations
+client.on('connect', () => {
+  console.log('Connected to Redis');
+
+  // Set a key-value pair
+  client.set('mykey', 'Hello, Redis!', (err, reply) => {
+    if (err) throw err;
+    console.log(reply); // Output: OK
+
+    // Get the value of the key
+    client.get('mykey', (err, reply) => {
+      if (err) throw err;
+      console.log(reply); // Output: Hello, Redis!
+
+      // Check if the key exists
+      client.exists('mykey', (err, reply) => {
+        if (err) throw err;
+        console.log(reply); // Output: 1 (exists) or 0 (does not exist)
+
+        // Delete the key
+        client.del('mykey', (err, reply) => {
+          if (err) throw err;
+          console.log(reply); // Output: 1 (deleted) or 0 (does not exist)
+
+          // Close the connection
+          client.quit();
+        });
+      });
+    });
+  });
+});
+```
+
+### Step 4: Run the Script
+
+Run the script using Node.js:
+
+```bash
+node app.js
+```
+
+### Additional Operations
+
+Here are some additional Redis operations you can perform using the Node.js Redis client:
+
+1. **Increment a value:**
+
+   ```javascript
+   client.incr('mycounter', (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: incremented value
+   });
+   ```
+
+2. **Push elements to a list:**
+
+   ```javascript
+   client.lpush('mylist', 'first', (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: new length of the list
+   });
+
+   client.lpush('mylist', 'second', (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: new length of the list
+   });
+   ```
+
+3. **Get elements from a list:**
+
+   ```javascript
+   client.lrange('mylist', 0, -1, (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: list of elements
+   });
+   ```
+
+4. **Add members to a set:**
+
+   ```javascript
+   client.sadd('myset', 'member1', (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: 1 (if new member added)
+   });
+
+   client.sadd('myset', 'member2', (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: 1 (if new member added)
+   });
+   ```
+
+5. **Get members of a set:**
+
+   ```javascript
+   client.smembers('myset', (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: set of members
+   });
+   ```
+
+6. **Add members with scores to a sorted set:**
+
+   ```javascript
+   client.zadd('myzset', 1, 'member1', (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: 1 (if new member added)
+   });
+
+   client.zadd('myzset', 2, 'member2', (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: 1 (if new member added)
+   });
+   ```
+
+7. **Get members of a sorted set by score:**
+
+   ```javascript
+   client.zrange('myzset', 0, -1, 'WITHSCORES', (err, reply) => {
+     if (err) throw err;
+     console.log(reply); // Output: sorted set of members with scores
+   });
+   ```
+
+These examples should help you get started with using Redis in your Node.js applications. If you have any specific requirements or encounter any issues, feel free to ask for further assistance!
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
 </details>
