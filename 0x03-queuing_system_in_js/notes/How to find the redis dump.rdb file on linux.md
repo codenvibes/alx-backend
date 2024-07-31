@@ -1,5 +1,5 @@
 
-### How to find the redis <code>dump.rdb</code> file on linux
+## How to find the redis <code>dump.rdb</code> file on linux
 
 The `dump.rdb` file is the default location where Redis stores its snapshot of the data set, which is used for persistence. By default, this file is located in the directory specified by the `dir` configuration parameter in the Redis configuration file (`redis.conf`). The exact location can vary depending on how Redis was installed and configured on your system.
 

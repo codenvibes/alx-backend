@@ -1,4 +1,4 @@
-### How to kill the Redis server using its process ID (PID)
+## How to kill the Redis server using its process ID (PID)
 
 To kill the Redis server using its process ID (PID), you need to follow these steps:
 
