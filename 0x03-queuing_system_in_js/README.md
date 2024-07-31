@@ -56,6 +56,85 @@
 <details>
 <summary><b><a href=" "> </a>How to run a Redis server on your machine</b></summary><br>
 
+To run a Redis server on your machine, follow these steps. The instructions cover installation and running Redis on both Linux (Ubuntu) and Windows.
+
+### On Linux (Ubuntu)
+
+1. **Update your package lists:**
+
+   ```bash
+   sudo apt-get update
+   ```
+
+2. **Install Redis:**
+
+   ```bash
+   sudo apt-get install redis-server
+   ```
+
+3. **Start the Redis server:**
+
+   ```bash
+   sudo systemctl start redis-server
+   ```
+
+4. **Enable Redis to start on boot:**
+
+   ```bash
+   sudo systemctl enable redis-server
+   ```
+
+5. **Check the status of the Redis server:**
+
+   ```bash
+   sudo systemctl status redis-server
+   ```
+
+6. **Connect to the Redis server:**
+
+   ```bash
+   redis-cli
+   ```
+
+### Basic Redis Commands
+
+Once you have the Redis server running, you can use the Redis CLI to interact with the server. Here are some basic commands:
+
+- **Set a key-value pair:**
+
+  ```bash
+  SET mykey "Hello, Redis!"
+  ```
+
+- **Get the value of a key:**
+
+  ```bash
+  GET mykey
+  ```
+
+- **Check if a key exists:**
+
+  ```bash
+  EXISTS mykey
+  ```
+
+- **Delete a key:**
+
+  ```bash
+  DEL mykey
+  ```
+
+- **List all keys:**
+
+  ```bash
+  KEYS *
+  ```
+
+- **Flush all keys from the database:**
+
+  ```bash
+  FLUSHALL
+  ```
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
 </details>
@@ -64,6 +143,219 @@
 <details>
 <summary><b><a href=" "> </a>How to run simple operations with the Redis client</b></summary><br>
 
+Running simple operations with the Redis client (redis-cli) involves using basic Redis commands to set, get, and manage key-value pairs. Here are some examples to help you get started:
+
+### Connecting to Redis
+
+First, ensure your Redis server is running. Then, open your terminal or command prompt and connect to the Redis server using the Redis client:
+
+```bash
+redis-cli
+```
+
+### Basic Operations
+
+1. **Set a key-value pair:**
+
+   ```bash
+   SET mykey "Hello, Redis!"
+   ```
+
+2. **Get the value of a key:**
+
+   ```bash
+   GET mykey
+   ```
+
+3. **Check if a key exists:**
+
+   ```bash
+   EXISTS mykey
+   ```
+
+4. **Delete a key:**
+
+   ```bash
+   DEL mykey
+   ```
+
+5. **Increment the value of a key (must be an integer):**
+
+   ```bash
+   INCR mycounter
+   ```
+
+6. **Decrement the value of a key (must be an integer):**
+
+   ```bash
+   DECR mycounter
+   ```
+
+7. **Append a value to a key:**
+
+   ```bash
+   APPEND mykey " How are you?"
+   ```
+
+8. **Get a substring of the value of a key:**
+
+   ```bash
+   GETRANGE mykey 0 4
+   ```
+
+9. **Set multiple keys at once:**
+
+   ```bash
+   MSET key1 "value1" key2 "value2" key3 "value3"
+   ```
+
+10. **Get the values of multiple keys at once:**
+
+    ```bash
+    MGET key1 key2 key3
+    ```
+
+### Working with Lists
+
+1. **Push elements to the head of a list:**
+
+   ```bash
+   LPUSH mylist "first"
+   LPUSH mylist "second"
+   ```
+
+2. **Push elements to the tail of a list:**
+
+   ```bash
+   RPUSH mylist "third"
+   ```
+
+3. **Get elements from a list:**
+
+   ```bash
+   LRANGE mylist 0 -1
+   ```
+
+4. **Pop an element from the head of a list:**
+
+   ```bash
+   LPOP mylist
+   ```
+
+5. **Pop an element from the tail of a list:**
+
+   ```bash
+   RPOP mylist
+   ```
+
+### Working with Hashes
+
+1. **Set a field in a hash:**
+
+   ```bash
+   HSET myhash field1 "value1"
+   ```
+
+2. **Get the value of a field in a hash:**
+
+   ```bash
+   HGET myhash field1
+   ```
+
+3. **Set multiple fields in a hash:**
+
+   ```bash
+   HMSET myhash field2 "value2" field3 "value3"
+   ```
+
+4. **Get multiple fields from a hash:**
+
+   ```bash
+   HMGET myhash field1 field2
+   ```
+
+5. **Get all fields and values in a hash:**
+
+   ```bash
+   HGETALL myhash
+   ```
+
+### Working with Sets
+
+1. **Add members to a set:**
+
+   ```bash
+   SADD myset "member1"
+   SADD myset "member2"
+   ```
+
+2. **Get all members of a set:**
+
+   ```bash
+   SMEMBERS myset
+   ```
+
+3. **Check if a member exists in a set:**
+
+   ```bash
+   SISMEMBER myset "member1"
+   ```
+
+4. **Remove a member from a set:**
+
+   ```bash
+   SREM myset "member1"
+   ```
+
+### Working with Sorted Sets
+
+1. **Add members with scores to a sorted set:**
+
+   ```bash
+   ZADD myzset 1 "member1"
+   ZADD myzset 2 "member2"
+   ```
+
+2. **Get all members of a sorted set by score:**
+
+   ```bash
+   ZRANGE myzset 0 -1 WITHSCORES
+   ```
+
+3. **Get the score of a member in a sorted set:**
+
+   ```bash
+   ZSCORE myzset "member1"
+   ```
+
+4. **Remove a member from a sorted set:**
+
+   ```bash
+   ZREM myzset "member1"
+   ```
+
+### Transaction Operations
+
+1. **Start a transaction:**
+
+   ```bash
+   MULTI
+   ```
+
+2. **Queue multiple commands:**
+
+   ```bash
+   SET key1 "value1"
+   SET key2 "value2"
+   ```
+
+3. **Execute the transaction:**
+
+   ```bash
+   EXEC
+   ```
+
+These examples cover the basic operations you can perform with Redis using the Redis client. You can find more commands and detailed documentation on the [official Redis documentation page](https://redis.io/commands).
 
 <br><p align="center">※※※※※※※※※※※※</p><br>
 </details>
