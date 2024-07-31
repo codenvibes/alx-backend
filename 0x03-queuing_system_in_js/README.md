@@ -1630,7 +1630,7 @@ OK
 
 
 <!-- --------------------------------------------Notes Start--------------------------------------------  -->
-<details><summary>How to kill the Redis server using its process ID (PID)<summary>
+<details><summary>How to kill the Redis server using its process ID (PID)</summary>
 
 To kill the Redis server using its process ID (PID), you need to follow these steps:
 
